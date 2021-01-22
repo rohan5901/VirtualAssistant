@@ -171,12 +171,17 @@ def run_jarvis():
         print(command + 'good')
         webbrowser.open_new_tab(command)
         
-    elif 'open' or 'youtube' or 'google' or 'gmail' in command:
-        command = command.replace('open', '')
-        command = command.replace('%20', '')
-        url_maker = "https://www." + str(command)+".com"
-        webbrowser.open_new_tab(url_maker)
-        talk(command + ' is now open, enjoy')
+    elif 'youtube' in command:
+        webbrowser.open_new_tab("https://www.youtube.com/")
+        talk('Youtube is now open, enjoy')
+        
+    elif 'google' in command:
+        webbrowser.open_new_tab("https://www.google.com/")
+        talk('Google is now open, enjoy')
+        
+    elif 'gmail' in command:
+        webbrowser.open_new_tab("https://www.gmail.com/")
+        talk('gmail is now open, enjoy')
 
         
     elif 'meaning of' in command:
