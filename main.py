@@ -2,6 +2,7 @@ import speech_recognition as sr
 import pyttsx3
 import pywhatkit
 import datetime
+import time
 import wikipedia
 import pyjokes
 import webbrowser
@@ -47,7 +48,8 @@ def wishMe():
          print('goood eveningggg roohaan')
          talk('I hope you are enjoying your evening buddy.')
          talk('Tell me how can i help you.')
-
+    
+    time.sleep(2)
       
         
 
@@ -87,6 +89,8 @@ def take_command():
     
      except:
          pass
+     
+     time.sleep(2)
      return command
 
     
@@ -113,6 +117,8 @@ def tell_city():
     
     except:
         pass
+    
+    time.sleep(2)
     return command
 
     
@@ -130,7 +136,7 @@ def run_jarvis():
         talk('Current time is ' + time)
         print(time)
         
-    elif 'tell me about' or 'who is' in command:
+    elif 'about' or 'who is' in command:
         person = command.replace('tell me about', '')
         info = wikipedia.summary(person, 1)
         talk(info)
@@ -249,9 +255,6 @@ def run_jarvis():
     else:
         talk('pardon me, can you please repeat that again.')
         
-
-        
-
 
 
 
