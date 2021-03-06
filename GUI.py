@@ -51,14 +51,39 @@ quit_button.grid(row=1, column=3,padx=5)
 textbox = Text(frame2)
 textbox.grid(row=1)
 
+
+#to print all the output or print function in tkinter display box.
 def redirector(inputStr):
     textbox.insert(INSERT, inputStr)
 
 
 sys.stdout.write = redirector #whenever sys.stdout.write is called, redirector is called.
 
+#to give written commands.
+
+chat_command = StringVar()
+def submit():
+    global chat
+    global chat_command
+    
+    chat=chat_command.get()
+    print(chat + "1")
+    chat_command.set("")
+    run_jarvis_chat(chat)
+    
+    chat_entry = Entry(frame3, textvariable=chat_command)
+    chat_entry.grid(row=1, column=1,columnspan=2,rowspan=2,padx=5,pady=10)
+
+    sub_btn = Button(frame3, text="submit", command = submit)
+    sub_btn.grid(row=1,column=3,padx=5,pady=10)
+    
 
 
+chat_entry = Entry(frame3, textvariable=chat_command)
+chat_entry.grid(row=1, column=1,columnspan=2,rowspan=2,padx=5,pady=10)
+
+sub_btn = Button(frame3, text="submit", command = submit)
+sub_btn.grid(row=1,column=3,padx=5,pady=10)
 
 
 
