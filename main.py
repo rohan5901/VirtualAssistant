@@ -10,7 +10,7 @@ from playsound import playsound
 import wolframalpha
 import requests
 import json
- 
+
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
@@ -22,9 +22,7 @@ listening = True
 
 
 
-    
 
-        
 
 def talk(text):
     engine.say(text)
@@ -68,7 +66,6 @@ def take_command():
         playsound('sound.mp3')
         
      else:        
-        talk('anything else ')
         playsound('sound2.mp3')
 
 
@@ -120,7 +117,6 @@ def tell_city():
 
     
 
-
 def run_jarvis():
     command = take_command()
     print(command)
@@ -134,7 +130,7 @@ def run_jarvis():
         talk('Current time is ' + time)
         print(time)
         
-    elif 'tell me about' in command:
+    elif 'tell me about' or 'who is' in command:
         person = command.replace('tell me about', '')
         info = wikipedia.summary(person, 1)
         talk(info)
@@ -254,11 +250,8 @@ def run_jarvis():
         talk('pardon me, can you please repeat that again.')
         
 
+        
 
-        
-        
-while True:
-    run_jarvis()
 
 
 
