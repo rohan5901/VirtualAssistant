@@ -18,7 +18,7 @@ listener = sr.Recognizer()
 engine = pyttsx3.init()
 engine. setProperty("rate", 175)
 voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[1].id)
+engine.setProperty('voice', voices[0].id)
 rounds = 0
 listening = True
 
@@ -185,6 +185,7 @@ def run_jarvis():
         command = command.replace('meaning of', '')
         means = wikipedia.summary(command, 1)
         talk(means)
+        print(means)
         
     elif 'capital' in command:
         app_id = '5X639U-WAP7U9827U'
@@ -192,6 +193,7 @@ def run_jarvis():
         res = client.query(command)
         ans = next(res.results).text
         talk(ans)
+        print(ans)
         
         
     elif  "where is" in command:
@@ -200,7 +202,13 @@ def run_jarvis():
         talk("Hold on Rohan, I will show you where " + command + " is.")
         os.system(location_url)
 
-        
+    elif "calculate" or "+" or "-" or "*" or "/" in command:
+        app_id = '5X639U-WAP7U9827U'
+        client = wolframalpha.Client(app_id)
+        math_res = client.query(command)
+        math_ans = next(math_res.results).text
+        talk("it is equal to " + math_ans)
+        print(math_ans)
         
     
     elif 'weather' or 'weather like' in command:
@@ -249,7 +257,7 @@ def run_jarvis():
 #=============================================================
 
 def run_jarvis_chat(chat):
-    print(chat+"2")
+    print(chat)
     if 'play' in chat:
         song = chat.replace('play', '')
         talk('playing ' + song)
@@ -285,7 +293,14 @@ def run_jarvis_chat(chat):
         talk('I am Jarvis version 1 point O, your personal assistant.   '
              '\n I can open youtube, google chrome, gmail and stackoverflow for you.   '
              '\n I can also predict date and time '
-             '\n click beautifull selfies for your handsome face and'
+             '\n I can get top headlines for you from times of India.   '
+             '\n You can ask me mathematical and geographical questions too.   '
+             '\n I can tell you hot bollywood and hollywood gossips   ' 
+             'and \n i can also tell you the weather for you to plan your day . ')
+        
+        print('I am Jarvis version 1.O, your personal assistant.   '
+             '\n I can open youtube, google chrome, gmail and stackoverflow for you.   '
+             '\n I can also predict date and time '
              '\n I can get top headlines for you from times of India.   '
              '\n You can ask me mathematical and geographical questions too.   '
              '\n I can tell you hot bollywood and hollywood gossips   ' 
@@ -328,7 +343,7 @@ def run_jarvis_chat(chat):
         res = client.query(chat)
         ans = next(res.results).text
         talk(ans)
-        print(chat)
+        print(ans)
         
         
     elif  "where is" in chat:
@@ -337,25 +352,34 @@ def run_jarvis_chat(chat):
         talk("Hold on Rohan, I will show you where " + chat + " is.")
         os.system(location_url)
 
-        
-        
-    
-    elif 'weather' or 'weather like' in chat:
+
+    elif "calculate" or "+" or "-" or "*" or "/" in chat:
+        app_id = '5X639U-WAP7U9827U'
+        client = wolframalpha.Client(app_id)
+        math_res = client.query(chat)
+        math_ans = next(math_res.results).text
+        print("=" + math_ans)    
+
+
+    elif 'weather of' or 'whats the weather like in' in chat:
         global listening
         
         API_URL = "http://api.openweathermap.org/data/2.5/weather?";
                 
         API_KEY = "f13e951b419a4489bbb36891974f5443"
         
-        
-        location = tell_city()
-        complete_url =  API_URL + "appid=" + API_KEY + "&q=" + location
+        if "weather of" in chat:
+            location = chat.replace("weather of","")
+            
+        else:
+            location = chat.replace("whats the weather like in","")
+            complete_url =  API_URL + "appid=" + API_KEY + "&q=" + location
         
         js = requests.get(complete_url).json()
         
         if js["cod"] == "404":
             talk("sorry could not find the location you asked for")
-            print("sorry could not find the location you asked for")
+            print("sorry could not find the location you asked for \n")
             
         else:
 

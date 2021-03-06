@@ -67,7 +67,6 @@ def submit():
     global chat_command
     
     chat=chat_command.get()
-    print(chat + "1")
     chat_command.set("")
     run_jarvis_chat(chat)
     
