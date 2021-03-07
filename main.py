@@ -130,11 +130,14 @@ def run_jarvis():
         talk('Current time is ' + time)
         print(time)
         
-    #elif 'about' or 'who is' in command:
-        #person = command.replace('tell me about', '')
-        #info = wikipedia.summary(person, 1)
-        #talk(info)
-        #print(info)
+    elif 'about' or 'who is' in command:
+        if 'about' in command:
+            person = command.replace('tell me about', '')
+        else:
+            person = command.replace('who is', '')
+        info = wikipedia.summary(person, 1)
+        talk(info)
+        print(info)
 
     elif 'date' in command:
         date = datetime.date.today().strftime('%Y, %B %d')
@@ -200,7 +203,7 @@ def run_jarvis():
         command = command.replace("where is", "" )
         location_url = 'https://www.google.co.in/maps/place/' + command
         talk("Hold on Rohan, I will show you where " + command + " is.")
-        os.system(location_url)
+        webbrowser.open_new_tab(location_url)
 
     elif "calculate" or "+" or "-" or "*" or "/" in command:
         app_id = '5X639U-WAP7U9827U'
@@ -268,8 +271,8 @@ def run_jarvis_chat(chat):
         talk('Current time is ' + time)
         print(time)
      
-    elif "who" in chat:
-        person = chat.replace('tell me about', '')
+    elif "who is" in chat:
+        person = chat.replace('who is', '')
         info = wikipedia.summary(person, 1)
         talk(info)
         print(info)
@@ -350,7 +353,8 @@ def run_jarvis_chat(chat):
         chat = chat.replace("where is", "" )
         location_url = 'https://www.google.co.in/maps/place/' + chat
         talk("Hold on Rohan, I will show you where " + chat + " is.")
-        os.system(location_url)
+        print("Hold on Rohan, I will show you where " + chat + " is.")
+        webbrowser.open_new_tab(location_url)
 
 
     elif "calculate" or "+" or "-" or "*" or "/" in chat:
@@ -358,7 +362,7 @@ def run_jarvis_chat(chat):
         client = wolframalpha.Client(app_id)
         math_res = client.query(chat)
         math_ans = next(math_res.results).text
-        print("=" + math_ans)    
+        print("= " + math_ans)    
 
 
     elif 'weather of' or 'whats the weather like in' in chat:
